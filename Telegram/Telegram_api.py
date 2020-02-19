@@ -3,10 +3,8 @@ import request
 
 
 def get_token_file():
-    f_token = open("Telegram_token", "r")
+    f_token = open("Telegram/Telegram_token", "r")
     return f_token.read()
-
-
 
 import logging
 
@@ -47,11 +45,12 @@ def gender(update, context):
 
 
 def photo(update, context):
-    global photo_index   user = update.message.from_user
+    global photo_index   
+    user = update.message.from_user
     photo_file = update.message.photo[-1].get_file()
     #photo_index = len(update.message.photo)
-    photo_file.download('user_photo{}.jpg'.format(str(photo_index)))
-    logger.info("Photo of %s: %s", user.first_name, 'user_photo{}.jpg'.format(str(photo_index)))
+    photo_file.download('Photos/user_photo{}.jpg'.format(str(photo_index)))
+    logger.info("Photo of %s: %s", user.first_name, 'Photos/user_photo{}.jpg'.format(str(photo_index)))
     update.message.reply_text('Gorgeous! Now, send me your location please, '
                               'or send /skip if you don\'t want to.')
     photo_index += 1
