@@ -1,5 +1,5 @@
-import TLE_cal
-from sheets import SheetCon
+import utility.TLE_cal
+from utility.sheets import SheetCon
 from datetime import date, time, datetime, timedelta
 from pprint import pprint
 
@@ -12,8 +12,8 @@ sheet = SheetCon()
 #gets passes for the next 24 hours
 def add_next_passes(start_time):
     #duchifat_3_TLE = TLE_cal.get_update_TLE(tleFile_URL, satellite_name)
-    v = TLE_cal.get_passes(HSL_cordinates, geoid, satellite_name, start_time, 24, 5)
-    v = TLE_cal.convert_passes_str(v)
+    v = utility.TLE_cal.get_passes(HSL_cordinates, geoid, satellite_name, start_time, 24, 5)
+    v = utility.TLE_cal.convert_passes_str(v)
     for line in v:
         sheet.add_pass(line)
         string = ""
