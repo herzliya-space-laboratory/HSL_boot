@@ -1,6 +1,6 @@
 import TLE_cal
 from sheets import SheetCon
-from datetime import date, time, datetime
+from datetime import date, time, datetime, timedelta
 from pprint import pprint
 
 satellite_name = "DUCHIFAT-3"
@@ -22,5 +22,8 @@ def add_next_passes(start_time):
         print(string)
 
 time = sheet.find_last_pass()
-add_next_passes(time)
-#sheet.add_operators(["Elai", "גל"], datetime.strptime("2020-02-16 22:32:29", "%Y-%m-%d %H:%M:%S"))
+if (time < datetime.utcnow()):
+    time = datetime.utcnow()
+if (datetime.utcnow() + timedelta(days = 2) > time):
+    add_next_passes(time)
+sheet.add_operators(["Elai", "רועי"], datetime.strptime("2020-02-23 01:58:27", "%Y-%m-%d %H:%M:%S"))
