@@ -2,7 +2,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from pprint import pprint
 from datetime import date, datetime
-from utility.exceptions import RowNotExists
+from exceptions import RowNotExists
 
 
 class SheetCon:

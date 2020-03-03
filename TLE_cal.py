@@ -3,7 +3,7 @@ import urllib3
 
 from datetime import date, time, datetime, timedelta
 from pprint import pprint
-from utility.exceptions import SatelliteNotFound
+from exceptions import SatelliteNotFound
 
 #return a TLE of Duchifat-3 from 'tleFile_URL' in a list with 2 cells
 #example: ['1 44854U 19089C   20031.47769533  .00000208  00000-0  23303-4 0  9997', '2 44854  36.9659 193.6942 0008882  14.3632 345.7372 14.98957921  7580']
