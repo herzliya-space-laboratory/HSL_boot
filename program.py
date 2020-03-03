@@ -13,6 +13,8 @@ sheet = SheetCon()
 def add_next_passes(start_time):
     #duchifat_3_TLE = TLE_cal.get_update_TLE(tleFile_URL, satellite_name)
     v = utility.TLE_cal.get_passes(HSL_cordinates, geoid, satellite_name, start_time, 24, 5)
+    for pass_ in v:
+        pass_[0] = pass_[0] + timedelta(hours=2)
     v = utility.TLE_cal.convert_passes_str(v)
     for line in v:
         sheet.add_pass(line)
@@ -26,4 +28,5 @@ if (time < datetime.utcnow()):
     time = datetime.utcnow()
 if (datetime.utcnow() + timedelta(days = 2) > time):
     add_next_passes(time)
-sheet.add_operators(["Elai", "רועי"], datetime.strptime("2020-02-23 01:58:27", "%Y-%m-%d %H:%M:%S"))
+sheet.add_yotam_passes()
+#sheet.add_operators(["Yotam", "Yotam"], datetime.strptime("2020-02-24 01:59:24", "%Y-%m-%d %H:%M:%S"))

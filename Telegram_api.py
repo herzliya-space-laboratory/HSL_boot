@@ -1,6 +1,14 @@
 import logging
+import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+#import importlib
+#importlib.import_module(os.path.abspath(os.getcwd()) + "/utility/TLE_cal.py")
+
+from datetime import datetime
+import sys
+sys.path.insert(1, '../utility/')
+import TLE_cal
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -8,8 +16,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-import ...utility.TLE_cal
-from datetime import datetime
 
 def get_token_file():
     f_token = open("Telegram/Telegram_token", "r")
@@ -24,8 +30,8 @@ def echo(update, context):
 
 def get_passes(update, context):
     #passes = "Return sometime later... Remember I am always here for you"
-    passes = utility.TLE_cal.get_passes([32.1624, 34.8447], 19.2080, "DUCHIFAT-3", datetime.utcnow(), 24, 5)
-    passes = utility.TLE_cal.convert_passes_str(passes)
+    passes = TLE_cal.get_passes([32.1624, 34.8447], 19.2080, "DUCHIFAT-3", datetime.utcnow(), 24, 5)
+    passes = TLE_cal.convert_passes_str(passes)
     update.message.reply_text(passes)
 
 def error(update, context):

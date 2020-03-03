@@ -2,7 +2,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from pprint import pprint
 from datetime import date, datetime
-from exceptions import RowNotExists
+from utility.exceptions import RowNotExists
 
 
 class SheetCon:
@@ -15,6 +15,8 @@ class SheetCon:
 
 
     def add_pass(self, pass_info):
+        pass_info.append("")
+        pass_info.append("Yotam")
         self.sheet.insert_row(pass_info, self.row_insert, "RAW")
 
 
@@ -66,7 +68,7 @@ class SheetCon:
                 cell_value += ", " + name
         cell_value = cell_value[2:len(cell_value)]
         self.sheet.update_cell(cell_cor[0], cell_cor[1], cell_value)
-
+    
 
     def get_passes(self, start_time, end_time):
         #todo: program function
