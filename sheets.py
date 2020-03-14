@@ -16,7 +16,7 @@ class SheetCon:
 
     def add_pass(self, pass_info):
         pass_info.append("")
-        pass_info.append("Yotam")
+        #pass_info.append("Yotam")
         self.sheet.insert_row(pass_info, self.row_insert, "RAW")
 
 
