@@ -13,6 +13,9 @@ class SheetCon:
         self.sheet = self.client.open("Duchifat-3 table passes").sheet1
         self.row_insert = 3
 
+    def createCreds(self):
+        self.creds = ServiceAccountCredentials.from_json_keyfile_name("Creds.json", self.scope)
+        self.client = gspread.authorize(self.creds)
 
     def add_pass(self, pass_info):
         pass_info.append("")

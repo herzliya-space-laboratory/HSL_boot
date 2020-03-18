@@ -9,7 +9,9 @@ tleFile_URL = "https://www.celestrak.com/NORAD/elements/amateur.txt"
 HSL_cordinates = [32.1624, 34.8447]
 geoid = 19.2080
 sheet = SheetCon()
-delay = 60*60*12
+#delay = 60*60*12
+delay = 60*60
+countErros = 0
 
 #gets passes for the next 24 hours
 def add_next_passes(start_time):
@@ -26,12 +28,24 @@ def add_next_passes(start_time):
         print(string)
 
 while (True):
-    time = sheet.find_last_pass()
-    if (time < datetime.utcnow()):
-        time = datetime.utcnow()
-    if (datetime.utcnow() + timedelta(days = 2) > time):
-        add_next_passes(time)
-    sleep(delay)
-    print("Hey")
+    try:
+        countErros = 0
+        time = sheet.find_last_pass()
+        if (time < datetime.utcnow()):
+            time = datetime.utcnow()
+        if (datetime.utcnow() + timedelta(days = 2) > time):
+            add_next_passes(time)
+        print("\nstart delay")
+        sleep(delay)
+        print("end delay\n")
+    except:
+        if countErros > 10:
+            break
+            print("Learn to code bitch")
+            sleep(60*60*24)
+        else:
+            sheet.createCreds()
+            countErros += 1
+            sleep(10)
 
 #sheet.add_operators(["Yotam", "Yotam"], datetime.strptime("2020-02-24 01:59:24", "%Y-%m-%d %H:%M:%S"))
