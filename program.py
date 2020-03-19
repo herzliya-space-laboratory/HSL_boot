@@ -8,13 +8,12 @@ satellite_name = "DUCHIFAT-3"
 tleFile_URL = "https://www.celestrak.com/NORAD/elements/amateur.txt"
 HSL_cordinates = [32.1624, 34.8447]
 geoid = 19.2080
-sheet = SheetCon()
 #delay = 60*60*12
 delay = 60*60
 countErros = 0
 
 #gets passes for the next 24 hours
-def add_next_passes(start_time):
+def add_next_passes(start_time, sheet):
     #duchifat_3_TLE = TLE_cal.get_update_TLE(tleFile_URL, satellite_name)
     v = TLE_cal.get_passes(HSL_cordinates, geoid, satellite_name, start_time, 24, 5)
     for pass_ in v:
@@ -28,13 +27,14 @@ def add_next_passes(start_time):
         print(string)
 
 while (True):
+    sheet = SheetCon()
     try:
         countErros = 0
         time = sheet.find_last_pass()
         if (time < datetime.utcnow()):
             time = datetime.utcnow()
         if (datetime.utcnow() + timedelta(days = 2) > time):
-            add_next_passes(time)
+            add_next_passes(time, sheet)
         print("\nstart delay")
         sleep(delay)
         print("end delay\n")
