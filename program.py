@@ -44,6 +44,7 @@ while (True):
             print("Learn to code bitch")
             sleep(60*60*24)
         else:
+            print("Exception trying to get creds")
             sheet.createCreds()
             countErros += 1
             sleep(10)
