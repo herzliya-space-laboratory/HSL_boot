@@ -1,5 +1,6 @@
 import TLE_cal
 from sheets import SheetCon
+from pytz import timezone
 from datetime import date, time, datetime, timedelta
 from time import sleep
 from pprint import pprint
@@ -12,12 +13,17 @@ geoid = 19.2080
 delay = 60*60
 countErros = 0
 
+def get_currentDST():
+    IsraelTimeZone = timezone("Israel")
+    IsraelTime = datetime.now(IsraelTimeZone)
+    return IsraelTime.dst()
+
 #gets passes for the next 24 hours
 def add_next_passes(start_time, sheet):
     #duchifat_3_TLE = TLE_cal.get_update_TLE(tleFile_URL, satellite_name)
     v = TLE_cal.get_passes(HSL_cordinates, geoid, satellite_name, start_time, 24, 5)
     for pass_ in v:
-        pass_[0] = pass_[0] + timedelta(hours=2) + timedelta(hours=1)
+        pass_[0] = pass_[0] + timedelta(hours=2) + get_currentDST()
     v = TLE_cal.convert_passes_str(v)
     for line in v:
         sheet.add_pass(line)
