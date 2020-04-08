@@ -23,7 +23,8 @@ def add_next_passes(start_time, sheet):
     #duchifat_3_TLE = TLE_cal.get_update_TLE(tleFile_URL, satellite_name)
     v = TLE_cal.get_passes(HSL_cordinates, geoid, satellite_name, start_time, 24, 5)
     for pass_ in v:
-        pass_[0] = pass_[0] + timedelta(hours=2) + get_currentDST()
+        pass_.insert(1, pass_[0])                                       #add UTC time
+        pass_[0] = pass_[0] + timedelta(hours=2) + get_currentDST()     #add Israel time
     v = TLE_cal.convert_passes_str(v)
     for line in v:
         sheet.add_pass(line)

@@ -40,9 +40,11 @@ def convert_passes_str(passes):
         string = str(line[0])
         line[0] = str(string[0:string.find(".")])
         string = str(line[1])
-        line[1] = string[string.find(":")+1:7]
+        line[1] = str(string[0:string.find(".")])
         string = str(line[2])
-        line[2] = string[0:6]
+        line[2] = string[string.find(":")+1:7]
+        string = str(line[3])
+        line[3] = string[0:6]
     return passes
 
 
