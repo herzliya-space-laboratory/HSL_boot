@@ -1,4 +1,4 @@
-# HSL_boot
+# HSL_bot
 A bot assistant inspired by Hila
 
 To start using locally the bot you need to get the file
